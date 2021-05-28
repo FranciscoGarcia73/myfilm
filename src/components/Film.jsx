@@ -1,48 +1,8 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
 import { FlexDiv, Card } from "./UI/Basic";
 
-const api = {
-  key: "c49b5d8",
-  base: "http://www.omdbapi.com/?apikey=",
-};
-
-function Film() {
-  const [film, setFilm] = useState("");
-  const [dFilm, setDfilm] = useState(true);
-  const [datos, setDatos] = useState();
-
-  useEffect(() => {
-    axios
-      .get(`${api.base}${api.key}&t=${film}`)
-      .then((response) => {
-        console.log(response);
-        setDatos(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [dFilm]);
-
-  const search = (evt) => {
-    if (evt.key === "Enter") {
-      setDfilm(!dFilm);
-    }
-  };
-
+function Film({ datos }) {
   return (
     <div>
-      <header className="box-search">
-        <input
-          type="text"
-          className="search-film"
-          placeholder="Introduce pelicula ..."
-          onChange={(e) => setFilm(e.target.value)}
-          value={film}
-          onKeyPress={search}
-        />
-      </header>
-
       <FlexDiv className="movil">
         <div className="flex">
           <div className="poster">
