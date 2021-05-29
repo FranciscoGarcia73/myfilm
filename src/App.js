@@ -3,7 +3,7 @@ import { useState} from "react";
 
 const api = {
   key: "c49b5d8",
-  base: "http://www.omdbapi.com/?apikey=",
+  base: "https://www.omdbapi.com/?apikey=",
 };
 
 function App() {
