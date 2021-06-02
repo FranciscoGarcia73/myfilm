@@ -69,12 +69,15 @@ p{
     margin: 0 auto;
     padding-top: 10px;
   }
+
   #card{
     border: 0;
   }
+
   .poster{
     width: 90vw;
   }
+  
  .App{
    margin: 0 auto;
  }
