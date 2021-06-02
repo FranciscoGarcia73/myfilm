@@ -1,5 +1,9 @@
 import Film from "./components/Film";
-import { useState} from "react";
+import Search from "./components/Search";
+import React, { useEffect } from "react";
+import { useState, Suspense } from "react";
+import axios from "axios";
+import { BrowserRouter, Route, Switch, NavLink } from "react-router-dom";
 
 const api = {
   key: "c49b5d8",
@@ -8,46 +12,41 @@ const api = {
 
 function App() {
 
-
   const [datos, setDatos] = useState();
-  const [film, setFilm] = useState("");
+  const [films, setFilms] = useState("");
 
-  
+  const handleClick = (titulo) => setFilms(titulo);
+
+  useEffect (() => {
+    axios.get(`${api.base}${api.key}&t=${films}`)
+      .then((response) => {
+        console.log(response);
+        setDatos(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     
-
-  const search = evt => {
-    if (evt.key === "Enter") {
-      fetch
-        (`${api.base}${api.key}&t=${film}`)
-        .then(res => res.json())
-        .then((response) => {
-          console.log(response);
-          setDatos(response);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  }
-
-
+  },[films]);
 
   return (
-    <div className="App">
-      <header className="box-search">
-        <input
-          type="text"
-          className="search-film"
-          placeholder="Introduce pelicula (en ingles).."
-          onChange={(e) => setFilm(e.target.value)}
-          value={film}
-          onKeyPress={search}
-        />
-      </header>
-      {(typeof datos != "undefined") ? (
-        <Film datos={datos} />
-        ):('')}
-    </div>
+    <BrowserRouter>
+      <div className="App">
+          <Switch>
+             <Route path="/" exact>
+              <Suspense fallback={<div>Cargando...</div>}>
+                <Search onClick = {handleClick} />
+              </Suspense>
+            </Route>
+            <Route path="/film" exact>
+              <Suspense fallback={<div>Cargando...</div>}>
+                <Film datos={datos} />
+              </Suspense>
+            </Route>
+            <Route render={() => <h1>404 Not Found</h1>} />
+          </Switch>
+      </div>
+    </BrowserRouter>
   );
 }
 

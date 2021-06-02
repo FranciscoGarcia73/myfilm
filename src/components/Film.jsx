@@ -8,7 +8,7 @@ function Film({ datos }) {
           <div className="poster">
             <img src={datos.Poster} alt="No hay imagen ..."></img>
           </div>
-          <Card>
+          <Card id="card">
             <p>Estreno: {datos.Released}</p>
             <br />
             <p>Director: {datos.Director}</p>
