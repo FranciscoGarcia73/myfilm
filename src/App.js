@@ -3,7 +3,7 @@ import Search from "./components/Search";
 import React, { useEffect } from "react";
 import { useState, Suspense } from "react";
 import axios from "axios";
-import { BrowserRouter, Route, Switch, NavLink } from "react-router-dom";
+import { BrowserRouter, Route, Switch} from "react-router-dom";
 
 const api = {
   key: "c49b5d8",
