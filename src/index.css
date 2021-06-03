@@ -77,6 +77,10 @@ p{
   .poster{
     width: 90vw;
   }
+
+  .boton {
+    width: 14%;
+  }
   
  .App{
    margin: 0 auto;
